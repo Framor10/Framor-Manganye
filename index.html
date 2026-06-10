@@ -1248,66 +1248,115 @@
             color: var(--white);
         }
         
-        .menu-products {
-            padding: 20px;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .menu-product-item {
-            background: #fafafa;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid #eee;
-        }
-        
-        .menu-product-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .menu-product-img {
-            height: 130px;
-            overflow: hidden;
-        }
-        
-        .menu-product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .menu-product-info {
-            padding: 10px;
-        }
-        
-        .menu-product-info h4 {
-            font-size: 0.85rem;
-            margin-bottom: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .menu-product-info p {
-            font-size: 0.7rem;
-            color: var(--gray);
-            margin-bottom: 5px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .menu-product-price {
-            font-weight: 800;
-            color: var(--primary-red);
-            font-size: 0.9rem;
-        }
+        /* FIXED MENU MODAL - Better mobile layout */
+.menu-products {
+    padding: 15px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+.menu-product-item {
+    background: #fafafa;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-product-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.menu-product-img {
+    height: 120px;
+    overflow: hidden;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-product-info {
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-product-info h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--black);
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+}
+
+.menu-product-info p {
+    font-size: 0.7rem;
+    color: var(--gray);
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+}
+
+.menu-product-price {
+    font-weight: 800;
+    color: var(--primary-red);
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.menu-product-item .add-to-cart {
+    width: 100%;
+    margin-top: 5px;
+    padding: 6px;
+    font-size: 0.7rem;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-red), var(--primary-red-dark));
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s;
+}
+
+.menu-product-item .add-to-cart:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, #B80022, #8B0018);
+}
+
+/* Better category buttons on mobile */
+@media (max-width: 768px) {
+    .menu-categories {
+        gap: 6px;
+        padding: 10px 15px;
+    }
+    .menu-cat-btn {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+}
         
         /* Product Detail Modal */
         .product-detail-modal {
@@ -2470,8 +2519,28 @@ document.addEventListener('keydown', (e) => {
     // RENDER ONLY 2 PRODUCTS PER CATEGORY (compact)
     function renderAllSections() { const sections = { 'kota-chips': document.getElementById('kota-chips-grid'), 'drinks': document.getElementById('drinks-grid'), 'burger': document.getElementById('burger-grid'), 'pizza': document.getElementById('pizza-grid'), 'snacks': document.getElementById('snacks-grid') }; for (let [category, container] of Object.entries(sections)) { if (container) { let categoryProducts = products.filter(p => p.category === category); let featuredProducts = categoryProducts.slice(0, 2); if (featuredProducts.length > 0) { container.innerHTML = featuredProducts.map(prod => generateProductHTML(prod)).join(''); } else { container.innerHTML = '<div style="text-align:center; padding:30px; color:#999;">No products available</div>'; } } } attachProductEventListeners(); }
     
-    function generateProductHTML(prod) { const imageUrl = prod.image || 'https://via.placeholder.com/260x160?text=No+Image'; return `<div class="product-card" onclick="showProductDetail('${escapeHtml(prod.name)}', '${escapeHtml(prod.desc || 'Delicious meal prepared fresh for you!')}', ${prod.price}, '${imageUrl}')"><div class="product-img"><img src="${imageUrl}" alt="${prod.name}" onerror="this.src='https://via.placeholder.com/260x160?text=No+Image'">${prod.badge ? `<div class="product-badge">${prod.badge}</div>` : ''}</div><div class="product-info"><h3>${escapeHtml(prod.name)}</h3><p>${escapeHtml(prod.desc || 'Delicious meal prepared fresh for you!')}</p><div class="product-quantity"><button class="qty-decrease" onclick="event.stopPropagation()">-</button><input type="number" value="1" min="1" class="qty-input" onclick="event.stopPropagation()"><button class="qty-increase" onclick="event.stopPropagation()">+</button></div><div class="product-price"><span class="price">R${prod.price.toFixed(2)}</span><button class="add-to-cart" data-product="${escapeHtml(prod.name)}" data-price="${prod.price}" onclick="event.stopPropagation()"><i class="fas fa-cart-plus"></i> ADD</button></div></div></div>`; }
-    
+    function generateProductHTML(prod) { 
+    const imageUrl = prod.image || 'https://via.placeholder.com/260x160?text=No+Image'; 
+    const productPrice = prod.price || 0;
+    return `<div class="product-card" onclick="showProductDetail('${escapeHtml(prod.name)}', '${escapeHtml(prod.desc || 'Delicious meal prepared fresh for you!')}', ${productPrice}, '${imageUrl}')">
+        <div class="product-img"><img src="${imageUrl}" alt="${prod.name}" onerror="this.src='https://via.placeholder.com/260x160?text=No+Image'">${prod.badge ? `<div class="product-badge">${prod.badge}</div>` : ''}</div>
+        <div class="product-info">
+            <h3>${escapeHtml(prod.name)}</h3>
+            <p>${escapeHtml(prod.desc || 'Delicious meal prepared fresh for you!')}</p>
+            <div class="product-quantity">
+                <button class="qty-decrease" onclick="event.stopPropagation()">-</button>
+                <input type="number" value="1" min="1" class="qty-input" onclick="event.stopPropagation()">
+                <button class="qty-increase" onclick="event.stopPropagation()">+</button>
+            </div>
+            <div class="product-price">
+                <span class="price">R${productPrice.toFixed(2)}</span>
+                <button class="add-to-cart" data-product="${escapeHtml(prod.name)}" data-price="${productPrice}" onclick="event.stopPropagation()">
+                    <i class="fas fa-cart-plus"></i> ADD
+                </button>
+            </div>
+        </div>
+    </div>`; 
+}
     // Product detail modal
     window.showProductDetail = function(name, desc, price, imageUrl) { const modal = document.getElementById('productDetailModal'); const content = document.getElementById('productDetailContent'); content.innerHTML = `<img src="${imageUrl}" class="product-detail-img" alt="${escapeHtml(name)}" onerror="this.src='https://via.placeholder.com/500x250'"><div class="product-detail-body"><h2>${escapeHtml(name)}</h2><p class="product-detail-desc">${escapeHtml(desc)}</p><div class="product-detail-price">R${price.toFixed(2)}</div><div class="product-detail-quantity"><button class="detail-qty-btn" id="detailQtyDec">-</button><input type="number" id="detailQty" value="1" min="1" class="detail-qty-input"><button class="detail-qty-btn" id="detailQtyInc">+</button></div><button class="product-detail-add" id="detailAddToCart">Add to Cart - R${price.toFixed(2)}</button></div>`; modal.classList.add('active'); const qtyInput = document.getElementById('detailQty'); document.getElementById('detailQtyDec').onclick = () => { if (parseInt(qtyInput.value) > 1) qtyInput.value = parseInt(qtyInput.value) - 1; }; document.getElementById('detailQtyInc').onclick = () => { qtyInput.value = parseInt(qtyInput.value) + 1; }; document.getElementById('detailAddToCart').onclick = () => { addToCart(name, price, parseInt(qtyInput.value)); modal.classList.remove('active'); }; };
     document.getElementById('closeDetailModal').onclick = () => document.getElementById('productDetailModal').classList.remove('active');
@@ -2845,27 +2914,37 @@ function reorderLastItems() {
         menuProductsDiv.innerHTML = '<div style="text-align:center; padding:40px; grid-column:1/-1;"><i class="fas fa-search" style="font-size:2rem; opacity:0.5"></i><p style="margin-top:10px;">No products found.</p></div>'; 
         return; 
     } 
-    menuProductsDiv.innerHTML = filteredProducts.map(p => `<div class="menu-product-item" onclick="showProductDetail('${escapeHtml(p.name)}', '${escapeHtml(p.desc || 'Delicious meal!')}', ${p.price}, '${p.image || 'https://via.placeholder.com/200'}')">
-        <div class="menu-product-img"><img src="${p.image || 'https://via.placeholder.com/200'}" alt="${escapeHtml(p.name)}" onerror="this.src='https://via.placeholder.com/200'"></div>
-        <div class="menu-product-info">
-            <h4>${escapeHtml(p.name)}</h4>
-            <p>${escapeHtml(p.desc || 'Delicious meal!')}</p>
-            <div class="menu-product-price">R${p.price.toFixed(2)}</div>
-            <button class="add-to-cart" data-prod-name="${escapeHtml(p.name)}" data-prod-price="${p.price}" style="margin-top:8px; width:100%; padding:6px; font-size:0.7rem;">
-                <i class="fas fa-cart-plus"></i> Add to Cart
-            </button>
-        </div>
-    </div>`).join(''); 
     
-    // Attach add-to-cart handlers for menu items
+    // Make sure price and button are ALWAYS shown
+    menuProductsDiv.innerHTML = filteredProducts.map(p => {
+        const productPrice = p.price || 0;
+        const productName = escapeHtml(p.name);
+        const productDesc = escapeHtml(p.desc || 'Delicious meal prepared fresh for you!');
+        const productImage = p.image || 'https://via.placeholder.com/200x140?text=No+Image';
+        const productBadge = p.badge ? `<span class="product-badge" style="position:absolute; top:5px; right:5px; background:var(--primary-red); color:white; padding:2px 6px; border-radius:12px; font-size:0.6rem;">${escapeHtml(p.badge)}</span>` : '';
+        
+        return `<div class="menu-product-item" style="position:relative" onclick="showProductDetail('${productName}', '${productDesc}', ${productPrice}, '${productImage}')">
+            ${productBadge}
+            <div class="menu-product-img"><img src="${productImage}" alt="${productName}" onerror="this.src='https://via.placeholder.com/200x140?text=No+Image'"></div>
+            <div class="menu-product-info">
+                <h4>${productName}</h4>
+                <p>${productDesc}</p>
+                <div class="menu-product-price"><strong>R${productPrice.toFixed(2)}</strong></div>
+                <button class="add-to-cart" data-prod-name="${productName}" data-prod-price="${productPrice}" onclick="event.stopPropagation(); addToCart('${productName.replace(/'/g, "\\'")}', ${productPrice}, 1)">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
+            </div>
+        </div>`;
+    }).join(''); 
+    
+    // Re-attach handlers for dynamically created buttons
     document.querySelectorAll('.menu-product-item .add-to-cart').forEach(btn => {
         btn.onclick = (e) => {
             e.stopPropagation();
             const name = btn.getAttribute('data-prod-name');
             const price = parseFloat(btn.getAttribute('data-prod-price'));
-            if (name && price) {
+            if (name && !isNaN(price)) {
                 addToCart(name, price, 1);
-                // Button feedback
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check"></i> ADDED!';
                 btn.style.background = '#28a745';
