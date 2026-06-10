@@ -999,33 +999,33 @@
             border-radius: 2px;
         }
         
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
+       .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* Always 4 columns */
+    gap: 15px;
+}
         
         /* COMPACT Product Card */
         .product-card {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            position: relative;
-            cursor: pointer;
-        }
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
         
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
         }
         
-        .product-img {
-            height: 160px;
-            position: relative;
-            overflow: hidden;
-        }
+       .product-img {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+}
         
         .product-img img {
             width: 100%;
@@ -1067,15 +1067,11 @@
         }
         
         .product-info p {
-            color: var(--gray);
-            font-size: 0.7rem;
-            margin-bottom: 10px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
         
         .product-quantity {
             display: flex;
@@ -2526,7 +2522,7 @@ document.addEventListener('keydown', (e) => {
 
 
     // RENDER ONLY 2 PRODUCTS PER CATEGORY (compact)
-    function renderAllSections() { const sections = { 'kota-chips': document.getElementById('kota-chips-grid'), 'drinks': document.getElementById('drinks-grid'), 'burger': document.getElementById('burger-grid'), 'pizza': document.getElementById('pizza-grid'), 'snacks': document.getElementById('snacks-grid') }; for (let [category, container] of Object.entries(sections)) { if (container) { let categoryProducts = products.filter(p => p.category === category); let featuredProducts = categoryProducts.slice(0, 2); if (featuredProducts.length > 0) { container.innerHTML = featuredProducts.map(prod => generateProductHTML(prod)).join(''); } else { container.innerHTML = '<div style="text-align:center; padding:30px; color:#999;">No products available</div>'; } } } attachProductEventListeners(); }
+    function renderAllSections() { const sections = { 'kota-chips': document.getElementById('kota-chips-grid'), 'drinks': document.getElementById('drinks-grid'), 'burger': document.getElementById('burger-grid'), 'pizza': document.getElementById('pizza-grid'), 'snacks': document.getElementById('snacks-grid') }; for (let [category, container] of Object.entries(sections)) { if (container) { let categoryProducts = products.filter(p => p.category === category); let featuredProducts = categoryProducts.slice(0, 4); if (featuredProducts.length > 0) { container.innerHTML = featuredProducts.map(prod => generateProductHTML(prod)).join(''); } else { container.innerHTML = '<div style="text-align:center; padding:30px; color:#999;">No products available</div>'; } } } attachProductEventListeners(); }
     
     function generateProductHTML(prod) { 
     const imageUrl = prod.image || 'https://via.placeholder.com/260x160?text=No+Image'; 
