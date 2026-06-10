@@ -410,6 +410,7 @@
             box-shadow: var(--shadow-sm);
             font-weight: 600;
             color: var(--gray-dark);
+            position: relative;
         }
         
         .category-item i {
@@ -1143,118 +1144,168 @@
         .add-to-cart:hover {
             transform: scale(1.02);
         }
-        
-        /* MENU MODAL */
-        .menu-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 6000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .menu-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .menu-modal-content {
-            background: var(--white);
-            width: 90%;
-            max-width: 1200px;
-            max-height: 85vh;
-            border-radius: 30px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .menu-modal-header {
-            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-dark));
-            color: var(--white);
-            padding: 18px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        
-        .menu-modal-header h2 {
-            font-size: 1.3rem;
-        }
-        
-        .close-menu {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-        
-        .menu-search {
-            padding: 15px 20px;
-            background: var(--gray-light);
-            border-bottom: 1px solid #eee;
-            flex-shrink: 0;
-        }
-        
-        .menu-search input {
-            width: 100%;
-            padding: 12px 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        
-        .menu-search input:focus {
-            border-color: var(--primary-red);
-            outline: none;
-        }
-        
-        .menu-categories {
-            display: flex;
-            gap: 10px;
-            padding: 12px 20px;
-            overflow-x: auto;
-            background: var(--white);
-            border-bottom: 1px solid #eee;
-            flex-shrink: 0;
-        }
-        
-        .menu-cat-btn {
-            padding: 6px 16px;
-            background: var(--gray-light);
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            white-space: nowrap;
-        }
-        
-        .menu-cat-btn.active {
-            background: var(--primary-red);
-            color: var(--white);
-        }
-        
-        /* FIXED MENU MODAL - Better mobile layout */
+    
+        /* MENU MODAL - WITH IMPROVED VERTICAL SCROLLBAR */
+.menu-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 6000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.menu-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-modal-content {
+    background: var(--white);
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 85vh;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-modal-header {
+    background: linear-gradient(135deg, var(--primary-red), var(--primary-red-dark));
+    color: var(--white);
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.menu-modal-header h2 {
+    font-size: 1.3rem;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.menu-search {
+    padding: 15px 20px;
+    background: var(--gray-light);
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.menu-search input {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.menu-search input:focus {
+    border-color: var(--primary-red);
+    outline: none;
+}
+
+/* SCROLLABLE CATEGORIES - horizontal scroll */
+.menu-categories {
+    display: flex;
+    gap: 10px;
+    padding: 12px 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: var(--white);
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+    scrollbar-width: thin;
+    white-space: nowrap;
+}
+
+.menu-categories::-webkit-scrollbar {
+    height: 3px;
+}
+
+.menu-categories::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.menu-categories::-webkit-scrollbar-thumb {
+    background: var(--primary-red);
+    border-radius: 10px;
+}
+
+.menu-cat-btn {
+    padding: 6px 16px;
+    background: var(--gray-light);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.menu-cat-btn.active {
+    background: var(--primary-red);
+    color: var(--white);
+}
+
+/* THIS IS THE PRODUCTS AREA - WITH IMPROVED VERTICAL SCROLLBAR */
 .menu-products {
-    padding: 15px;
+    flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
+    padding: 15px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 12px;
+
+}
+
+/* ===== IMPROVED VERTICAL SCROLLBAR FOR MENU PRODUCTS ===== */
+.menu-products::-webkit-scrollbar {
+    width: 8px;
+}
+
+.menu-products::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+    margin: 8px 0;
+}
+
+.menu-products::-webkit-scrollbar-thumb {
+    background: var(--primary-red);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.menu-products::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-red-dark);
+    cursor: pointer;
+}
+
+/* Firefox scrollbar styling */
+.menu-products {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-red) #f1f1f1;
 }
 
 .menu-product-item {
@@ -1274,7 +1325,7 @@
 }
 
 .menu-product-img {
-    height: 120px;
+    height: 130px;
     overflow: hidden;
     background: #f5f5f5;
     display: flex;
@@ -1310,7 +1361,6 @@
     color: var(--gray);
     margin-bottom: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.3;
@@ -1319,7 +1369,7 @@
 .menu-product-price {
     font-weight: 800;
     color: var(--primary-red);
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 8px;
 }
 
@@ -1341,20 +1391,52 @@
     transition: all 0.2s;
 }
 
-.menu-product-item .add-to-cart:hover {
-    transform: scale(1.02);
-    background: linear-gradient(135deg, #B80022, #8B0018);
+.menu-products {
+    flex: 1 1 auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    min-height: 1100px !important;
+    max-height: calc(85vh - 160px) !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+    gap: 12px !important;
+    padding: 15px !important;
 }
 
-/* Better category buttons on mobile */
+/* Ensure modal opens properly on mobile */
 @media (max-width: 768px) {
-    .menu-categories {
-        gap: 6px;
-        padding: 10px 15px;
+    .menu-modal-content {
+        height: 90vh !important;
+        max-height: 90vh !important;
+        width: 95% !important;
     }
-    .menu-cat-btn {
-        padding: 5px 12px;
-        font-size: 0.7rem;
+    
+    
+    .menu-product-img {
+        height: 200px !important;
+    }
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    
+    
+    .menu-product-info h4 {
+        font-size: 0.75rem;
+    }
+    .menu-product-price {
+        font-size: 0.85rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+
+}
+
+@media (min-width: 1201px) {
+    .menu-products {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
         
@@ -1404,7 +1486,7 @@
             font-size: 1.5rem;
             margin-bottom: 8px;
         }
-        
+     
         .product-detail-desc {
             color: var(--gray);
             line-height: 1.6;
@@ -1671,10 +1753,7 @@
             margin-top: 12px;
         }
 
-        .category-item {
-    position: relative;
-}
-.category-badge {
+        .category-badge {
     position: absolute;
     top: -5px;
     right: -5px;
@@ -2135,6 +2214,11 @@
                 font-size: 0.75rem;
             }
         }
+
+        /* ========== FORCE FIX FOR MENU SCROLL ========== */
+
+
+
     </style>
 </head>
 <body>
@@ -2201,8 +2285,8 @@
 .order-btn, .cta-button {
     animation: pulse-ring 2s infinite;
 }
-</style>
 
+</style>
 <script>
     window.addEventListener('load', function() {
         const loadingScreen = document.getElementById('loading-screen');
@@ -2305,7 +2389,7 @@
         </button>
     </div>
     
-    <!-- Product Sections - ONLY 2 PRODUCTS PER CATEGORY -->
+    <!-- Product Sections -->
     <section id="kota-chips" class="products-section">
         <div class="container">
             <div class="section-title"><h2>KOTA & CHIPS</h2></div>
@@ -2501,8 +2585,6 @@
         }
     });
 }
-// Call this after products load: updateCategoryBadges();
-
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'c' || e.key === 'C') {
@@ -2707,48 +2789,13 @@ document.addEventListener('keydown', (e) => {
     playPopSound(); // Play pop sound on add to cart
 }
 
-// Flying particle animation
-function createFlyingParticle(productName, price) {
-    // Get cart position
-    const cartRect = document.querySelector('.cart-icon').getBoundingClientRect();
-    const cartX = cartRect.left + cartRect.width / 2;
-    const cartY = cartRect.top + cartRect.height / 2;
-    
-    // Create floating number
-    const flyer = document.createElement('div');
-    flyer.innerHTML = `<i class="fas fa-cart-plus"></i> +1`;
-    flyer.style.position = 'fixed';
-    flyer.style.left = '50%';
-    flyer.style.top = '50%';
-    flyer.style.backgroundColor = 'var(--primary-red)';
-    flyer.style.color = 'white';
-    flyer.style.padding = '8px 16px';
-    flyer.style.borderRadius = '50px';
-    flyer.style.fontSize = '0.9rem';
-    flyer.style.fontWeight = 'bold';
-    flyer.style.zIndex = '10000';
-    flyer.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-    flyer.style.whiteSpace = 'nowrap';
-    flyer.style.pointerEvents = 'none';
-    flyer.style.transition = 'all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-    document.body.appendChild(flyer);
-    
-    // Animate to cart
-    setTimeout(() => {
-        flyer.style.transform = `translate(${cartX - window.innerWidth/2}px, ${cartY - window.innerHeight/2}px) scale(0.3)`;
-        flyer.style.opacity = '0';
-        setTimeout(() => flyer.remove(), 600);
-    }, 50);
-}
-
-// Simple pop sound using Web Audio (optional, doesn't require user interaction first time)
+// Simple pop sound using Web Audio
 let audioContext = null;
 function playPopSound() {
     try {
         if (!audioContext) {
             audioContext = new (window.AudioContext || window.webkitAudioContext)();
         }
-        // Create a short beep
         const oscillator = audioContext.createOscillator();
         const gainNode = audioContext.createGain();
         oscillator.connect(gainNode);
@@ -2758,37 +2805,8 @@ function playPopSound() {
         oscillator.start();
         gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.2);
         oscillator.stop(audioContext.currentTime + 0.2);
-    } catch(e) { /* silent fail if audio not allowed */ }
+    } catch(e) { /* silent fail */ }
 }
-
-// Also override the menu modal's add to cart buttons to show feedback
-// Update the renderMenuProducts function to include better button handling
-const originalRenderMenu = renderMenuProducts;
-window.renderMenuProducts = function() {
-    originalRenderMenu();
-    // Add click handlers for all menu add-to-cart buttons
-    setTimeout(() => {
-        document.querySelectorAll('.menu-product-item .add-to-cart').forEach(btn => {
-            const originalClick = btn.onclick;
-            btn.onclick = (e) => {
-                e.stopPropagation();
-                const name = btn.getAttribute('data-prod-name') || btn.closest('.menu-product-info')?.querySelector('h4')?.innerText;
-                const price = parseFloat(btn.getAttribute('data-prod-price'));
-                if (name && price) {
-                    addToCart(name, price, 1);
-                    // Visual feedback on the button
-                    const originalHTML = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-check"></i> ADDED!';
-                    btn.style.background = '#28a745';
-                    setTimeout(() => {
-                        btn.innerHTML = originalHTML;
-                        btn.style.background = '';
-                    }, 800);
-                }
-            };
-        });
-    }, 100);
-};
 
 // Add CSS animations
 const styleSheet = document.createElement("style");
@@ -2863,11 +2881,6 @@ function reorderLastItems() {
     }
 }
 
-// Save order when placed (add inside your order submit function, after order is sent)
-// Find this line: showSuccessMessage(`✅ Order placed!...`);
-// Add right after it: localStorage.setItem('framor_last_order', JSON.stringify(cart.map(i => ({name:i.name, price:i.price, quantity:i.quantity}))));
-
-
     function populateOrderSummary() { const orderItemsList = document.getElementById('order-items-list'); const currentDate = new Date().toLocaleDateString('en-ZA'); let summary = `<div class="order-date"><strong>Date:</strong> ${currentDate}</div>`; summary += cart.map(item => `<div style="display:flex;justify-content:space-between;padding:6px 0;"><span>${escapeHtml(item.name)} x${item.quantity}</span><span>R${(item.price * item.quantity).toFixed(2)}</span></div>`).join(''); if (orderItemsList) orderItemsList.innerHTML = summary; updateCartTotal(); }
     function addPopularItemsRow() {
     const popular = products.filter(p => p.badge === 'BESTSELLER' || p.badge === 'POPULAR').slice(0, 4);
@@ -2901,49 +2914,53 @@ function reorderLastItems() {
     const menuModal = document.getElementById('menuModal'), menuProductsDiv = document.getElementById('menuProducts'), menuSearch = document.getElementById('menuSearch');
     let currentMenuCategory = 'all';
     window.openMenuModal = function(category = 'all') { currentMenuCategory = category; renderMenuProducts(); menuModal.classList.add('active'); document.querySelectorAll('.menu-cat-btn').forEach(btn => { if (btn.dataset.cat === category) btn.classList.add('active'); else btn.classList.remove('active'); }); };
-    function renderMenuProducts() { 
+function renderMenuProducts() { 
     let filteredProducts = [...products]; 
+    
     if (currentMenuCategory !== 'all') { 
         filteredProducts = filteredProducts.filter(p => p.category === currentMenuCategory); 
     } 
+    
     const searchTerm = menuSearch.value.toLowerCase().trim(); 
     if (searchTerm) { 
         filteredProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(searchTerm) || (p.desc && p.desc.toLowerCase().includes(searchTerm))); 
     } 
+    
     if (filteredProducts.length === 0) { 
         menuProductsDiv.innerHTML = '<div style="text-align:center; padding:40px; grid-column:1/-1;"><i class="fas fa-search" style="font-size:2rem; opacity:0.5"></i><p style="margin-top:10px;">No products found.</p></div>'; 
         return; 
     } 
     
-    // Make sure price and button are ALWAYS shown
     menuProductsDiv.innerHTML = filteredProducts.map(p => {
-        const productPrice = p.price || 0;
+        const productPrice = (p.price && !isNaN(p.price)) ? p.price : 0;
         const productName = escapeHtml(p.name);
         const productDesc = escapeHtml(p.desc || 'Delicious meal prepared fresh for you!');
-        const productImage = p.image || 'https://via.placeholder.com/200x140?text=No+Image';
-        const productBadge = p.badge ? `<span class="product-badge" style="position:absolute; top:5px; right:5px; background:var(--primary-red); color:white; padding:2px 6px; border-radius:12px; font-size:0.6rem;">${escapeHtml(p.badge)}</span>` : '';
+        let productImage = 'https://via.placeholder.com/200x140?text=Food';
+        if (p.image && p.image !== '' && p.image !== 'null') {
+            productImage = p.image;
+        }
         
-        return `<div class="menu-product-item" style="position:relative" onclick="showProductDetail('${productName}', '${productDesc}', ${productPrice}, '${productImage}')">
-            ${productBadge}
-            <div class="menu-product-img"><img src="${productImage}" alt="${productName}" onerror="this.src='https://via.placeholder.com/200x140?text=No+Image'"></div>
+        return `<div class="menu-product-item" onclick="showProductDetail('${productName.replace(/'/g, "\\'")}', '${productDesc.replace(/'/g, "\\'")}', ${productPrice}, '${productImage}')">
+            <div class="menu-product-img">
+                <img src="${productImage}" alt="${productName}" onerror="this.src='https://via.placeholder.com/200x140?text=Food'">
+            </div>
             <div class="menu-product-info">
                 <h4>${productName}</h4>
-                <p>${productDesc}</p>
+                <p>${productDesc.substring(0, 50)}${productDesc.length > 50 ? '...' : ''}</p>
                 <div class="menu-product-price"><strong>R${productPrice.toFixed(2)}</strong></div>
-                <button class="add-to-cart" data-prod-name="${productName}" data-prod-price="${productPrice}" onclick="event.stopPropagation(); addToCart('${productName.replace(/'/g, "\\'")}', ${productPrice}, 1)">
+                <button class="add-to-cart" data-prod-name="${productName.replace(/'/g, "\\'")}" data-prod-price="${productPrice}" onclick="event.stopPropagation(); addToCart('${productName.replace(/'/g, "\\'")}', ${productPrice}, 1)">
                     <i class="fas fa-cart-plus"></i> Add to Cart
                 </button>
             </div>
         </div>`;
     }).join(''); 
     
-    // Re-attach handlers for dynamically created buttons
     document.querySelectorAll('.menu-product-item .add-to-cart').forEach(btn => {
         btn.onclick = (e) => {
             e.stopPropagation();
             const name = btn.getAttribute('data-prod-name');
             const price = parseFloat(btn.getAttribute('data-prod-price'));
-            if (name && !isNaN(price)) {
+            if (name && !isNaN(price) && price > 0) {
                 addToCart(name, price, 1);
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check"></i> ADDED!';
@@ -2978,13 +2995,32 @@ function reorderLastItems() {
     if (checkoutBtn) { checkoutBtn.addEventListener('click', () => { if (cart.length === 0) { showSuccessMessage('Please add items to cart first!'); return; } cartModal.classList.remove('active'); orderModal.classList.add('active'); populateOrderSummary(); }); }
     document.querySelectorAll('.order-method').forEach(method => { method.addEventListener('click', () => { document.querySelectorAll('.order-method').forEach(m => m.classList.remove('active')); method.classList.add('active'); }); });
     
-    if (orderForm) { orderForm.addEventListener('submit', async (e) => { e.preventDefault(); const now = Date.now(); if (now - lastSubmitTime < SUBMIT_COOLDOWN) { showSuccessMessage(`⚠️ Please wait a moment before ordering again.`); return; } clearFormErrors(); let isValid = true; const name = document.getElementById('customer-name').value.trim(); if (!validateName(name)) { showFieldError('name-error', 'Valid name required'); isValid = false; } let phone = document.getElementById('customer-phone').value.trim(); if (!validateSAPhone(phone)) { showFieldError('phone-error', 'Valid SA phone number required'); isValid = false; } else { phone = formatSAPhoneForDisplay(phone); document.getElementById('customer-phone').value = phone; } const email = document.getElementById('customer-email').value.trim(); if (!validateEmail(email)) { showFieldError('email-error', 'Valid email required'); isValid = false; } const address = document.getElementById('customer-address').value.trim(); if (!validateAddress(address)) { showFieldError('address-error', 'Complete address required'); isValid = false; } if (!isValid) { showSuccessMessage('❌ Please fix errors above.'); return; } if (cart.length === 0) { showSuccessMessage('Cart is empty.'); return; } lastSubmitTime = now; const deliveryTime = document.getElementById('delivery-time').value; const paymentMethod = document.getElementById('payment-method').value; const orderMethod = document.querySelector('.order-method.active').dataset.method; const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); const orderSummary = cart.map(item => `${item.name} x${item.quantity} - R${(item.price * item.quantity).toFixed(2)}`).join('\n'); const orderData = { name, phone, email, address, deliveryTime, paymentMethod, items: cart.map(item => ({ name: item.name, quantity: item.quantity, price: item.price })), total, method: orderMethod }; let savedOrders = localStorage.getItem('framor_orders'); let orders = savedOrders ? JSON.parse(savedOrders) : []; orders.unshift({ id: Date.now(), name, phone, email, address, deliveryTime, paymentMethod, method: orderMethod, items: cart.map(item => ({ name: item.name, quantity: item.quantity, price: item.price })), total, date: new Date().toLocaleString(), backendSynced: false }); localStorage.setItem('framor_orders', JSON.stringify(orders)); let backendResult = { success: false }; try { const response = await fetch(`${BACKEND_URL}/api/orders`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(orderData) }); backendResult = await response.json(); } catch (error) { console.error('Backend error:', error); } const message = `🍟 NEW ORDER FROM ERROL KOTAS! 🍟\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\nDelivery: ${deliveryTime}\nPayment: ${paymentMethod}\nOrder #: ${backendResult.order_number || 'pending'}\n\nITEMS:\n${orderSummary}\n\nTOTAL: R${total.toFixed(2)}`; if (orderMethod === 'whatsapp') { window.open(`https://wa.me/27609050450?text=${encodeURIComponent(message)}`, '_blank'); } else { window.open(`mailto:morganfrans6@gmail.com?subject=🍟 NEW ORDER from ${name}&body=${encodeURIComponent(message)}`, '_blank'); } showSuccessMessage(`✅ Order placed! ${backendResult.success ? 'Saved to server!' : 'Saved locally!'}`); startConfetti(); orderForm.reset(); orderModal.classList.remove('active'); cart = []; updateCartUI(); saveCartToStorage(); }); }
+    if (orderForm) { orderForm.addEventListener('submit', async (e) => { e.preventDefault(); const now = Date.now(); if (now - lastSubmitTime < SUBMIT_COOLDOWN) { showSuccessMessage(`⚠️ Please wait a moment before ordering again.`); return; } clearFormErrors(); let isValid = true; const name = document.getElementById('customer-name').value.trim(); if (!validateName(name)) { showFieldError('name-error', 'Valid name required'); isValid = false; } let phone = document.getElementById('customer-phone').value.trim(); if (!validateSAPhone(phone)) { showFieldError('phone-error', 'Valid SA phone number required'); isValid = false; } else { phone = formatSAPhoneForDisplay(phone); document.getElementById('customer-phone').value = phone; } const email = document.getElementById('customer-email').value.trim(); if (!validateEmail(email)) { showFieldError('email-error', 'Valid email required'); isValid = false; } const address = document.getElementById('customer-address').value.trim(); if (!validateAddress(address)) { showFieldError('address-error', 'Complete address required'); isValid = false; } if (!isValid) { showSuccessMessage('❌ Please fix errors above.'); return; } if (cart.length === 0) { showSuccessMessage('Cart is empty.'); return; } lastSubmitTime = now; const deliveryTime = document.getElementById('delivery-time').value; const paymentMethod = document.getElementById('payment-method').value; const orderMethod = document.querySelector('.order-method.active').dataset.method; const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); const orderSummary = cart.map(item => `${item.name} x${item.quantity} - R${(item.price * item.quantity).toFixed(2)}`).join('\n'); const orderData = { name, phone, email, address, deliveryTime, paymentMethod, items: cart.map(item => ({ name: item.name, quantity: item.quantity, price: item.price })), total, method: orderMethod }; let savedOrders = localStorage.getItem('framor_orders'); let orders = savedOrders ? JSON.parse(savedOrders) : []; orders.unshift({ id: Date.now(), name, phone, email, address, deliveryTime, paymentMethod, method: orderMethod, items: cart.map(item => ({ name: item.name, quantity: item.quantity, price: item.price })), total, date: new Date().toLocaleString(), backendSynced: false }); localStorage.setItem('framor_orders', JSON.stringify(orders)); let backendResult = { success: false }; try { const response = await fetch(`${BACKEND_URL}/api/orders`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(orderData) }); backendResult = await response.json(); } catch (error) { console.error('Backend error:', error); } const message = `🍟 NEW ORDER FROM ERROL KOTAS! 🍟\n\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\nDelivery: ${deliveryTime}\nPayment: ${paymentMethod}\nOrder #: ${backendResult.order_number || 'pending'}\n\nITEMS:\n${orderSummary}\n\nTOTAL: R${total.toFixed(2)}`; if (orderMethod === 'whatsapp') { window.open(`https://wa.me/27609050450?text=${encodeURIComponent(message)}`, '_blank'); } else { window.open(`mailto:morganfrans6@gmail.com?subject=🍟 NEW ORDER from ${name}&body=${encodeURIComponent(message)}`, '_blank'); } showSuccessMessage(`✅ Order placed! ${backendResult.success ? 'Saved to server!' : 'Saved locally!'}`); startConfetti(); orderForm.reset(); orderModal.classList.remove('active'); cart = []; updateCartUI(); saveCartToStorage(); localStorage.setItem('framor_last_order', JSON.stringify(cart.map(i => ({name:i.name, price:i.price, quantity:i.quantity})))); }); }
     
     if (floatingWhatsapp) { floatingWhatsapp.addEventListener('click', () => { window.open('https://wa.me/27609050450?text=Hi! I\'d like to order from Errol Kotas!', '_blank'); }); }
     document.querySelectorAll('.cta-button').forEach(link => { link.addEventListener('click', (e) => { const href = link.getAttribute('href'); if (href && href !== '#') { e.preventDefault(); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }); } }); });
     window.addEventListener('storage', async (e) => { if (e.key === 'framor_products') { await loadProductsFromSupabase(); showSuccessMessage('Menu updated!'); } });
     
     document.addEventListener('DOMContentLoaded', async () => { loadVideoReels(); await loadProductsFromSupabase(); loadCartFromStorage(); drawWheel(); setInterval(() => { const timerSpan = document.getElementById('timerMinutes'); if (timerSpan) { const mins = Math.floor(Math.random() * 20) + 20; timerSpan.textContent = `${mins}-${mins + 10}`; } }, 30000); });
+
+    // Force scroll on menu modal when opened
+function fixMenuScroll() {
+    setTimeout(function() {
+        var menuProducts = document.querySelector('.menu-modal .menu-products');
+        if (menuProducts) {
+            menuProducts.style.overflow = 'auto';
+            menuProducts.style.maxHeight = 'calc(85vh - 160px)';
+            console.log('Menu scroll fixed, height:', menuProducts.style.maxHeight);
+        }
+    }, 100);
+}
+
+// Override the openMenuModal function to fix scroll
+var originalOpenMenuModal = window.openMenuModal;
+window.openMenuModal = function(category) {
+    originalOpenMenuModal(category);
+    fixMenuScroll();
+};
 </script>
 </body>
 </html>
